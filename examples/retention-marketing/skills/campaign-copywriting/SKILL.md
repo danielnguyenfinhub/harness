@@ -34,6 +34,16 @@ Write the message a mortgage client actually receives. It has to do two jobs at 
 - Body: hook → 2–3 line value → single CTA button → mandatory footer (sender identity + business address + credit-licence statement + unsubscribe).
 - One CTA above the fold.
 
+## Factual-only reminders (do-not-mail track)
+
+When the segmenter runs DNM policy B, the do-not-mail track gets a **purely factual** message — never the marketing variant. Strip every promotional element: no offer, no "free review", no "reply YES", no benefit language. State the fact, identify the sender, give a contact number. See the `mortgage-marketing-compliance` skill's designated-message rules.
+
+- IO/fixed-rate expiry (defensible factual trigger):
+  > `{{first_name}}, a courtesy note from {{business_name}}: your {{lender}} interest-only period ends {{io_expiry_date}}, after which repayments move to principal & interest. Our office is on {{phone}} if you have questions.`
+- Anniversary/birthday: weak factual basis — prefer not to message the DNM track at all. If asked to, keep it strictly factual and flag it for the reviewer.
+
+Label the factual-only copy clearly as such so it is never sent to the marketing audience and vice versa.
+
 ## Variants & testing
 For Tier-1/high-value segments, provide an **A/B pair** (e.g. urgency-led vs benefit-led) so the broker can test. Label them clearly.
 

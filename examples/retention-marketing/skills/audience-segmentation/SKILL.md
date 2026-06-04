@@ -14,11 +14,15 @@ Order matters — filter for consent *before* de-duplicating, so suppression dec
 ### 1. Materialise each segment
 Take the opportunity register (`_workspace/01_retention-analyst_opportunities.md`) and pull the concrete contact records for each Tier-1/Tier-2 segment using the same CRM list-builder the analyst named (e.g. `build_fixed_rate_expiry_list`). Pull contact details via `get_contact_profile` / `get_client_full_profile` / `update_contact_phone_email` reads as needed.
 
-### 2. Consent filter (hard gate — fail closed)
+### 2. Consent filter (hard gate — fail closed by default)
 Run every contact through `check_do_not_mail_status` (and any do-not-contact / opt-out flags on the record).
-- Opted out or do-not-contact → **remove**. Not flag-and-keep — remove.
 - Consent status couldn't be verified → **remove** and count it. Never contact someone whose consent you couldn't confirm.
-Record how many were removed and why — this audit is what the compliance reviewer checks.
+- Opted out / do-not-mail → handle per the **DNM policy** below.
+Record how many were removed (and into which track) and why — this audit is what the compliance reviewer checks.
+
+**DNM policy — two options (the broker sets this; default is A):**
+- **A. Fail closed (default):** opted-out / do-not-mail → **remove**. Use this for any *marketing* message (an offer, a "reply for a review" CTA, a promotion). Messaging an opted-out client with promotional content breaches the Spam Act 2003.
+- **B. Factual-only track (only when the broker explicitly authorises it):** split the audience into a **marketing track** (consenting) and a **factual-only track** (do-not-mail). The factual-only track may receive *purely factual* service reminders that qualify as **designated commercial electronic messages** (e.g. "your interest-only period ends on {date}") — no offer, no CTA, no inducement. This is narrow: see the `mortgage-marketing-compliance` skill for what "purely factual" allows and requires, and confirm with the licensee/aggregator. Reminders with a genuine service trigger (IO/fixed-rate expiry, repayment change) have a defensible factual basis; relationship touches (anniversary, birthday) do not — prefer to drop DNM clients from those entirely.
 
 ### 3. De-duplicate across segments
 A client in multiple segments must receive **one** primary message, not three. Use `find_duplicate_contacts` to catch duplicate records, then apply the analyst's urgency tiers:
@@ -39,11 +43,14 @@ Write `_workspace/02_audience-segmenter_audiences.md`, one block per campaign:
 ```markdown
 ## Campaign: Fixed-rate expiry — Jun–Aug 2026
 - Final audience: 38 (SMS 30 / email 8)
+- DNM policy: A (fail closed)
 - Consent filter: started 42, removed 4 (3 do-not-contact, 1 consent unverifiable)
 - Suppressed (overlap): 6 — also matched anniversary; fixed-rate wins on urgency
 - Needs contact info: 2 (no valid mobile or email)
 - Source: build_fixed_rate_expiry_list
 ```
+
+When DNM policy B is in effect, report both tracks explicitly, e.g. `marketing track: 17 · factual-only track (DNM): 6`, so the copywriter writes the right message for each and the reviewer can check the factual-only copy against the designated-message rules.
 
 ## What you do NOT do
 - You do **not** write message copy (copywriter) or send anything (only after compliance sign-off + broker approval).

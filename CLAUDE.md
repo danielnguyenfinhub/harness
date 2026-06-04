@@ -12,3 +12,4 @@
 | Date | Change | Target | Reason |
 |------|--------|--------|--------|
 | 2026-06-04 | Initial build | retention-orchestrator + 4 agents (retention-analyst, audience-segmenter, campaign-copywriter, compliance-reviewer) + 4 skills | New harness for client retention & marketing domain |
+| 2026-06-04 | Added DNM policy B (factual-only track) | audience-segmentation, mortgage-marketing-compliance, campaign-copywriting | Broker requested SMS reminders be able to reach do-not-mail clients; encoded as a narrow designated-commercial-electronic-message carve-out (purely factual, no CTA, genuine service trigger, licensee sign-off), default remains fail-closed |

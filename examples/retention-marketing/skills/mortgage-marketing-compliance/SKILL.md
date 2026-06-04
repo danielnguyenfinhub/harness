@@ -43,6 +43,17 @@ Marketing **calls** are governed by the Do Not Call Register. SMS/email marketin
 ### 9. Channel hygiene — advisory
 Carrier spam filtering: avoid link-shorteners, ALL CAPS, excessive punctuation. These don't breach law but kill deliverability.
 
+## Factual-only reminders to opted-out clients (designated commercial electronic messages)
+
+The Spam Act treats a message that consists of **no more than factual information** (plus the sender's identifying and contact details) as a *designated commercial electronic message*, which sits outside the consent requirement. This is the only basis on which a do-not-mail client may receive a reminder — and it is narrow:
+
+- **Purely factual.** State the fact and nothing more: "your interest-only period ends on {date}", "your fixed rate ends on {date}". Identify the sender and give contact details.
+- **No promotion, no inducement, no CTA.** No "free review", "save", "sharp rate", "reply YES", "we can help". The moment a message promotes the broker's services it becomes commercial and the consent rule applies again — sending it to an opted-out client breaches the Act.
+- **Needs a genuine factual trigger.** A repayment/structure change (IO expiry, fixed-rate expiry) is a defensible factual reminder. A relationship touch (settlement anniversary, birthday) has no factual service trigger — its standing as "purely factual" is weak, so prefer to exclude do-not-mail clients from those campaigns entirely.
+- **Confirm with the licensee/aggregator** before relying on this carve-out, and keep the audit (who, why factual, what trigger).
+
+Reviewer stance: approve a factual-only message to a DNM client **only** if it has a genuine factual trigger and contains zero promotional content; otherwise return it (or recommend excluding the DNM contact). Flag anniversary/birthday factual messages as advisory — weak basis, prefer exclusion.
+
 ## Verdict format (reviewer)
 
 Per message, return:
