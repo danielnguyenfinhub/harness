@@ -1,2 +1,5 @@
 .DS_Store
 .claude/
+
+# Harness runtime artifacts (may contain client PII — never commit)
+_workspace/
